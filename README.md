@@ -34,10 +34,6 @@ Provide params using `--param_name`.
 - `cartoon`
 - `none` – no function is applied on video
 
-`width` – Width of the video. In `[0, MAX_CAMERA_RESOLUTION_X]`.
-
-`height` – height of the video. In `[0, MAX_CAMERA_RESOLUTION_Y]`.
-
 ## Installation on Raspberry Pi 3B+
 
 Installation instructions taking from plain Raspbian to OpenCV-equipped Raspberry. Tested on Rasberry Pi 3B+.
