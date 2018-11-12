@@ -22,6 +22,7 @@ class VideoCap:
         while True:
             _, frame = self.cap.read()
             try:
+                print(frame)
                 cut_frame = frame[0:320, 0:480]
                 # cut_frame = frame[self.x_min:self.x_max, self.y_min:self.y_max]
                 f_frame = self.fun(self, cut_frame, *self.args)
