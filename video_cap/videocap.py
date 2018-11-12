@@ -5,25 +5,28 @@ _PATH = 'video_cap/resources/trained_models/haarcascade_frontalface_default.xml'
 
 
 class VideoCap:
-    def __init__(self, function_name, x_min, y_min, x_max, y_max):
-        self.cap = cv2.VideoCapture(0)
+    def __init__(self, function_name):
+    # def __init__(self, function_name, x_min, y_min, x_max, y_max):
+        self.cap = cv2.VideoCapture()
         self.face_haar_cascade = None if function_name != 'face-recognition' else cv2.CascadeClassifier(_PATH)
         self.func_name = function_name
         self.fun = getattr(VideoCap, self.functions[function_name][0])
         self.args = []
-        self.x_min = x_min
-        self.x_max = x_max
-        self.y_min = y_min
-        self.y_max = y_max
+        # self.x_min = x_min
+        # self.x_max = x_max
+        # self.y_min = y_min
+        # self.y_max = y_max
 
     def run(self):
         self.get_arguments()
         while True:
             _, frame = self.cap.read()
             try:
-                cut_frame = frame[self.x_min:self.x_max, self.y_min:self.y_max]
+                cut_frame = frame[0:320, 0:480]
+                # cut_frame = frame[self.x_min:self.x_max, self.y_min:self.y_max]
                 f_frame = self.fun(self, cut_frame, *self.args)
-                frame[self.x_min:self.x_max, self.y_min:self.y_max] = f_frame
+                frame[0:320, 0:480] = f_frame
+                # frame[self.x_min:self.x_max, self.y_min:self.y_max] = f_frame
             except cv2.error:
                 print("Improperly defined resolution bounds or parameter values")
                 break
@@ -67,7 +70,6 @@ class VideoCap:
         return threshold_frame
 
     def _sobel_edge_det(self, frame, x, y):
-
         gray_scale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         sobel = cv2.Sobel(gray_scale, cv2.CV_64F, x, y, ksize=5)
         matrix_fit = np.reshape(sobel, sobel.shape + (1,))
