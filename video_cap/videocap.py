@@ -7,7 +7,7 @@ _PATH = 'video_cap/resources/trained_models/haarcascade_frontalface_default.xml'
 class VideoCap:
     def __init__(self, function_name):
     # def __init__(self, function_name, x_min, y_min, x_max, y_max):
-        self.cap = cv2.VideoCapture()
+        self.cap = cv2.VideoCapture(0)
         self.face_haar_cascade = None if function_name != 'face-recognition' else cv2.CascadeClassifier(_PATH)
         self.func_name = function_name
         self.fun = getattr(VideoCap, self.functions[function_name][0])
@@ -22,11 +22,10 @@ class VideoCap:
         while True:
             _, frame = self.cap.read()
             try:
-                print(frame)
-                cut_frame = frame[0:320, 0:480]
+                cut_frame = frame[0:480, 0:320]
                 # cut_frame = frame[self.x_min:self.x_max, self.y_min:self.y_max]
                 f_frame = self.fun(self, cut_frame, *self.args)
-                frame[0:320, 0:480] = f_frame
+                frame[0:480, 0:320] = f_frame
                 # frame[self.x_min:self.x_max, self.y_min:self.y_max] = f_frame
             except cv2.error:
                 print("Improperly defined resolution bounds or parameter values")
