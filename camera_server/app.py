@@ -7,7 +7,7 @@ def index():
     return 'Hello world'
 
 @app.route('/configure')
-def index():
+def configure():
     return render_template('configuration.html')
 
 if __name__ == '__main__':
