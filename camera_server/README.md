@@ -15,9 +15,12 @@ python3 app.py
 ```
 
 Configuration:
+Find your raspberry ip address in the local web.
 
 Go to:
-...
+```
+http://your-raspberry-ip:5000/configure
+```
 
 Configuration screen:
 
