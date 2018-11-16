@@ -4,9 +4,9 @@ import datetime
 import time
 import smtplib
 import configparser
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from email.MIMEImage import MIMEImage
+from email.mimemultipart import MIMEMultipart
+from email.mimetext import MIMEText
+from email.mimeimagemage import MIMEImage
 
 _PATH = '../video_cap/resources/trained_models/haarcascade_frontalface_default.xml'
 config_path = 'config.ini'
