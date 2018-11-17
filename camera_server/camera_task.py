@@ -32,16 +32,13 @@ def send_notification(img_name):
 
     body = "Somebody just tried to steal your carrots. Pics or it didn't happen, you say? I attached them."
     msg.attach(MIMEText(body, 'plain'))
-    #img_data = open('static/images/{img_name}.png'.format(img_name=img_name), 'rb').read()
-    #msg.attach(MIMEImage(img_data, name=img_name))
+    img_data = open('static/images/{img_name}.png'.format(img_name=img_name), 'rb').read()
+    msg.attach(MIMEImage(img_data, name=img_name))
 
     text = msg.as_string()
     server_addr_wp = "{server}:{port}".format(server=server_addr, port=port)
     print(server_addr_wp)
-    server = smtplib.SMTP(server_addr_wp)
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
+    server = smtplib.SMTP_SSL(server_addr_wp)
     server.login(username, password)
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
