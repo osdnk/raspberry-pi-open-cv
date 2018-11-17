@@ -10,15 +10,13 @@ def index():
 
 def save_config(request):
     config = configparser.ConfigParser()
-    config['email'] = \
-        {
-         'server': request.form['server'],
-         'port': request.form['port'],
-         'username': request.form['username'],
-         'password': request.form['password'],
-         'fromaddr': request.form['fromaddr'],
-         'toaddr': request.form['toaddr']
-        }
+    config.add_section('email')
+    config.set('email', 'server', request.form['server'])
+    config.set('email', 'port', request.form['port'])
+    config.set('email', 'username', request.form['username'])
+    config.set('email', 'password', request.form['password'])
+    config.set('email', 'fromaddr', request.form['fromaddr'])
+    config.set('email', 'toaddr', request.form['toaddr'])
     with open(_CONFIG_PATH, 'w') as configfile:
         config.write(configfile)
 

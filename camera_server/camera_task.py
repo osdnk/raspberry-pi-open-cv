@@ -1,20 +1,20 @@
 import numpy as np
-import cv2
+#import cv2
 import datetime
 import time
 import smtplib
 import configparser
-from email.mimemultipart import MIMEMultipart
-from email.mimetext import MIMEText
-from email.mimeimagemage import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 
 _PATH = '../video_cap/resources/trained_models/haarcascade_frontalface_default.xml'
 config_path = 'config.ini'
 
 
 # Read config file
-config = configparser.ConfigParser()
-config.read_file(config_path)
+config = configparser.RawConfigParser()
+config.read(config_path)
 
 # Initialize email sending
 server_addr = config.get('email', 'server')
@@ -32,17 +32,21 @@ def send_notification(img_name):
 
     body = "Somebody just tried to steal your carrots. Pics or it didn't happen, you say? I attached them."
     msg.attach(MIMEText(body, 'plain'))
-    img_data = open('static/images/{img_name}.png'.format(img_name=img_name), 'rb').read()
-    msg.attach(MIMEImage(img_data, name=img_name))
+    #img_data = open('static/images/{img_name}.png'.format(img_name=img_name), 'rb').read()
+    #msg.attach(MIMEImage(img_data, name=img_name))
 
     text = msg.as_string()
-    server = smtplib.SMTP(server_addr, port)
+    server_addr_wp = "{server}:{port}".format(server=server_addr, port=port)
+    print(server_addr_wp)
+    server = smtplib.SMTP(server_addr_wp)
     server.ehlo()
     server.starttls()
     server.ehlo()
     server.login(username, password)
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
+
+send_notification("asdf")
 # Initialize camera
 cap = cv2.VideoCapture(0)
 while True:
