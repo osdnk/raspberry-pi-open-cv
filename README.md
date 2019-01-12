@@ -3,7 +3,7 @@
 Small program allowing video manipulation using OpenCV along some popular
 image analyzing techniques.
 
-Made for demonstration of Rasberry Pi possibilities.
+Made for demonstration of Raspberry Pi possibilities.
 
 ## Usage
 
