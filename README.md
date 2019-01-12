@@ -36,7 +36,7 @@ Provide params using `--param_name`.
 
 ## Installation on Raspberry Pi 3B+
 
-Installation instructions taking from plain Raspbian to OpenCV-equipped Raspberry. Tested on Rasberry Pi 3B+.
+Installation instructions taking from plain Raspbian to OpenCV-equipped Raspberry. Tested on Raspberry Pi 3B+.
 
 > **NOTE:** _you can also run the installation script from install.sh which will do the whole thing automatically._
 
