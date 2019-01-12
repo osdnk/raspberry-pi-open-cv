@@ -1,4 +1,4 @@
-# rasberry-pi-open-cv
+# raspberry-pi-open-cv
 
 Small program allowing video manipulation using OpenCV along some popular
 image analyzing techniques.
